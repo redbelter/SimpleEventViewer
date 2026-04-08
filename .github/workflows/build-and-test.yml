@@ -29,7 +29,7 @@ jobs:
       run: dotnet test --no-build --configuration Release --verbosity normal
     
     - name: Publish application
-      run: dotnet publish EventLogViewer/EventLogViewer.csproj --configuration Release
+      run: dotnet publish EventLogViewer/EventLogViewer.csproj --configuration Release /p:PublishSingleFile=true /p:SelfContained=false
     
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
