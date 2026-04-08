@@ -22,9 +22,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     
-    - name: Install ILRepack locally
-      run: dotnet tool install --tool-path .tools ILRepack
-    
     - name: Build solution
       run: dotnet build --no-restore --configuration Release
     
@@ -32,14 +29,7 @@ jobs:
       run: dotnet test --no-build --configuration Release --verbosity normal
     
     - name: Publish application
-      run: dotnet publish EventLogViewer/EventLogViewer.csproj --configuration Release --runtime win-x64 /p:PublishSingleFile=true
-    
-    - name: Repack into single EXE
-      run: |
-        $publishDir = "EventLogViewer/bin/Release/net8.0-windows/win-x64/publish"
-        $exePath = Join-Path $publishDir "EventLogViewer.exe"
-        $dllPaths = Get-ChildItem $publishDir -Filter "*.dll" | Select-Object -ExpandProperty FullName
-        .\.tools\ilrepack /out:$exePath $exePath ($dllPaths -join ' ')
+      run: dotnet publish EventLogViewer/EventLogViewer.csproj --configuration Release /p:PublishSingleFile=true /p:SelfContained=false
     
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
