@@ -1,0 +1,17 @@
+## Build results
+bin/
+obj/
+publish/
+
+## Visual Studio cache/options directory
+.vs/
+*.user
+*.slnx
+
+## NuGet Packages
+*.nupkg
+*.nuget.props
+*.nuget.targets
+
+## Visual Studio log files
+*.log

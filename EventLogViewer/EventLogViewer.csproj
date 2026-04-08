@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="EventLogViewer.Tests\**" />
+    <EmbeddedResource Remove="EventLogViewer.Tests\**" />
+    <None Remove="EventLogViewer.Tests\**" />
+    <UpToDateCheckInput Remove="EventLogViewer.Tests\**" />
+  </ItemGroup>
+
+</Project>
