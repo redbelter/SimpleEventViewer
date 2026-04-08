@@ -23,7 +23,7 @@ jobs:
       run: dotnet restore
     
     - name: Install ILRepack
-      run: dotnet tool install --global ILRepack --version 2.0.36 || Write-Host "ILRepack already installed"
+      run: dotnet tool install --global ILRepack --version 2.0.36
     
     - name: Build solution
       run: dotnet build --no-restore --configuration Release
@@ -39,7 +39,7 @@ jobs:
         $publishDir = "EventLogViewer/bin/Release/net8.0-windows/win-x64/publish"
         $exePath = Join-Path $publishDir "EventLogViewer.exe"
         $dllPaths = Get-ChildItem $publishDir -Filter "*.dll" | Select-Object -ExpandProperty FullName
-        ilrepack /out:$exePath $exePath ($dllPaths -join ' ')
+        & "$env:USERPROFILE\.dotnet\tools\ilrepack.exe" /out:$exePath $exePath ($dllPaths -join ' ')
     
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
