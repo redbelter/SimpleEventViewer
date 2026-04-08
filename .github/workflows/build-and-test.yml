@@ -29,7 +29,13 @@ jobs:
       run: dotnet test --no-build --configuration Release --verbosity normal
     
     - name: Publish application
-      run: dotnet publish EventLogViewer/EventLogViewer.csproj --configuration Release --output ./artifacts
+      run: dotnet publish EventLogViewer/EventLogViewer.csproj --configuration Release --runtime win-x64 --self-contained true /p:PublishSingleFile=true
+    
+    - name: Copy artifacts
+      run: |
+        if (Test-Path "EventLogViewer/bin/Release/net8.0-windows/win-x64/publish") {
+          Copy-Item "EventLogViewer/bin/Release/net8.0-windows/win-x64/publish/*" -Destination "./artifacts/" -Recurse
+        }
     
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
